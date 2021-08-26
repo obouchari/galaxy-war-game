@@ -1,0 +1,16 @@
+{
+  "name": "game",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.4.4"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "phaser": "3.55.2"
+  }
+}
