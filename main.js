@@ -1,60 +1,23 @@
 import Phaser from "phaser";
+import MainMenuScene from "./scenes/scene-main-menu";
+import FirstScene from "./scenes/first-scene";
+import GameOverScene from "./scenes/scene-game-over";
+import screenSize from "./utils/screen-size";
 import "normalize.css";
 import "./style.css";
 
-// viewport dimensions
-const vw = Math.max(
-  document.documentElement.clientWidth || 0,
-  window.innerWidth || 0
-);
-
-const vh = Math.max(
-  document.documentElement.clientHeight || 0,
-  window.innerHeight || 0
-);
-
+// Set the configuration of the game
 const config = {
   type: Phaser.AUTO,
-  width: vw,
-  height: vh,
+  width: screenSize.vw,
+  height: screenSize.vh,
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 200 },
+      gravity: { x: 0, y: 0 },
     },
   },
-  scene: {
-    preload,
-    create,
-  },
+  scene: [MainMenuScene, FirstScene, GameOverScene],
 };
 
-const game = new Phaser.Game(config);
-
-function preload() {
-  this.load.setBaseURL("http://labs.phaser.io");
-
-  this.load.image("sky", "assets/skies/space3.png");
-  this.load.image("logo", "assets/sprites/phaser3-logo.png");
-  this.load.image("engine-effect", "assets/particles/yellow.png");
-}
-
-function create() {
-  this.add.image(vw / 2, vh / 2, "sky");
-
-  const particles = this.add.particles("engine-effect");
-
-  const emitter = particles.createEmitter({
-    speed: 100,
-    scale: { start: 1, end: 0 },
-    blendMode: "ADD",
-  });
-
-  const logo = this.physics.add.image(400, 100, "logo");
-
-  logo.setVelocity(50, 20);
-  logo.setBounce(1, 1);
-  logo.setCollideWorldBounds(true);
-
-  emitter.startFollow(logo);
-}
+export default new Phaser.Game(config);
