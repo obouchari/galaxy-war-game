@@ -14,7 +14,14 @@ class MainMenuScene extends MainScene {
 
     this.sfx = {
       tap: this.sound.add("tap-sound"),
+      bgMusic: this.sound.add("intro"),
     };
+
+    // Play intro music
+    this.sfx.bgMusic.play({
+      loop: true,
+      volume: 0.3,
+    });
 
     this.playBtn = this.add.sprite(width * 0.5, height * 0.5, "play-btn");
     this.playBtn.setInteractive();
@@ -30,17 +37,28 @@ class MainMenuScene extends MainScene {
     );
 
     // button on release event
-    this.playBtn.on(
-      "pointerup",
-      function () {
-        this.playBtn.setTexture("play-btn");
-        this.scene.start("FirstScene");
-      },
-      this
-    );
+    this.playBtn.on("pointerup", this.startGame, this);
 
-    // Add title to main menu
-    this.title = this.add.text(width * 0.5, 128, "Galaxy Defenders", {});
+    // Add logo to main menu
+    this.add.image(width * 0.5, 150, "game-logo");
+    // Add characters images
+    const alien = this.textures.get("alien").getSourceImage();
+    this.add.image(20, height - alien.height, "alien").setOrigin(0, 0);
+
+    const spaceSoldier = this.textures.get("space-soldier").getSourceImage();
+    this.add
+      .image(
+        width - spaceSoldier.width,
+        height - spaceSoldier.height,
+        "space-soldier"
+      )
+      .setOrigin(0, 0);
+  }
+
+  startGame() {
+    this.playBtn.setTexture("play-btn");
+    this.sfx.bgMusic.stop();
+    this.scene.start("FirstScene");
   }
 
   //  Update the scene

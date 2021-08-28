@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import spaceImg from "../assets/backgrounds/nebula-blue.png";
 
 class MainScene extends Phaser.Scene {
   constructor(scene) {
@@ -7,7 +8,7 @@ class MainScene extends Phaser.Scene {
 
   preload() {
     // Load background image
-    this.load.image("space", "../assets/backgrounds/nebula-blue.png");
+    this.load.image("space", spaceImg);
     this.load.image("small-stars", "../assets/backgrounds/stars-small_1.png");
     this.load.image("big-stars", "../assets/backgrounds/stars-big_1_1_pc.png");
 
@@ -67,7 +68,13 @@ class MainScene extends Phaser.Scene {
     this.load.audio("collect-sound", "../assets/sounds/sfx_collect.wav");
     this.load.audio("tap-sound", "../assets/sounds/sfx_tap.ogg");
     this.load.audio("lose-sound", "../assets/sounds/sfx_lose.ogg");
-    this.load.audio("intro", "../assets/sounds/sfx_tap.ogg");
+    this.load.audio("intro", "../assets/sounds/intro.mp3");
+
+    // load game logo
+    this.load.image("game-logo", "../assets/logo.png");
+    // load main menu screen characters
+    this.load.image("alien", "../assets/alien.png");
+    this.load.image("space-soldier", "../assets/space-soldier.png");
   }
 
   create() {

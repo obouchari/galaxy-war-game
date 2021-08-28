@@ -3,6 +3,7 @@ import MainMenuScene from "./scenes/scene-main-menu";
 import FirstScene from "./scenes/first-scene";
 import GameOverScene from "./scenes/scene-game-over";
 import screenSize from "./utils/screen-size";
+
 import "normalize.css";
 import "./style.css";
 

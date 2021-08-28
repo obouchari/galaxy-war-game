@@ -5,16 +5,24 @@ import Player from "../entities/player";
 import GunShipEnemy from "../entities/gun-ship-enemy";
 import ChaserEnemy from "../entities/chaser-enemy";
 
+import { world } from "../world";
+
 import MainScene from "./main-scene";
 
 class FirstScene extends MainScene {
   constructor() {
     super({ key: "FirstScene" });
+
+    this.hpBg;
+    this.hpBar;
   }
 
   // Create the scene
   create() {
     super.create.call(this);
+
+    this.hpBg = this.add.rectangle(100, 100, 400, 50, "0x000000").setOrigin(0);
+    this.hpBar = this.add.rectangle(100, 100, 400, 50, "0x00ff00").setOrigin(0);
 
     // Create explosion animation
     this.anims.create({
@@ -55,6 +63,7 @@ class FirstScene extends MainScene {
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    // this.input.mouse.onMouseMove
     this.keySpace = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SPACE
     );
@@ -131,8 +140,11 @@ class FirstScene extends MainScene {
       this.player,
       this.enemyLasers,
       function (player, enemyLaser) {
+        if (world.hp >= 10) {
+          world.hp -= 10;
+        }
         if (!player.getData("isDead") && !enemyLaser.getData("isDead")) {
-          player.explode();
+          // player.explode();
           enemyLaser.destroy();
         }
       }
@@ -151,9 +163,18 @@ class FirstScene extends MainScene {
     );
   }
 
+  updateHpBar() {
+    this.hpBar.displayWidth = world.hp * 4;
+    if (world.hp === 0 && !this.player.getData("isDead")) {
+      this.player.explode();
+    }
+  }
+
   //  Update the scene
   update() {
     super.update.call(this);
+
+    this.updateHpBar();
 
     if (!this.player.getData("isDead")) {
       this.player.update();
