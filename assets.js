@@ -1,4 +1,4 @@
-export default assets = {
+export default {
   gameLogo:
     "https://res.cloudinary.com/zentai-consulting/image/upload/v1630150379/game/logo_wvunxu.png",
 
