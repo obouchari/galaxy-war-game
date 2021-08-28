@@ -1,8 +1,3 @@
-@font-face {
-  font-family: Kenvector;
-  src: url("./assets/fonts/kenvector_future.ttf");
-}
-
 body {
   overflow: hidden;
 }
