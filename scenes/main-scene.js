@@ -1,5 +1,29 @@
 import Phaser from "phaser";
 import spaceImg from "../assets/backgrounds/nebula-blue.png";
+import smallStarsImg from "../assets/backgrounds/stars-small_1.png";
+import bigStarsImg from "../assets/backgrounds/stars-big_1_1_pc.png";
+import playerImg from "../assets/ships/ship-1.png";
+import playerLaserImg from "../assets/laser/blue/short-ray.png";
+import explosionImg from "../assets/effects/space-ship-explosion.png";
+import enemy1Lvl1Img from "../assets/enemies/level1/1.png";
+import enemy1Lvl1LaserImg from "../assets/laser/blue/round.png";
+import enemy2Lvl1Img from "../assets/enemies/level1/2.png";
+import enemy2Lvl1LaserImg from "../assets/laser/yellow/round.png";
+import enemy3Lvl1Img from "../assets/enemies/level1/3.png";
+import enemy3Lvl1LaserImg from "../assets/laser/pink/round.png";
+import chaserImg from "../assets/enemies/chaser.png";
+import playBtnImg from "../assets/buttons/unpressed/play.png";
+import playBtnPressedImg from "../assets/buttons/pressed/play.png";
+import gameLogoImg from "../assets/logo.png";
+import homeScreenAliensImg from "../assets/alien.png";
+import homeScreenSoldiersImg from "../assets/space-soldier.png";
+
+import explosionSFX from "../assets/sounds/sfx_explosion.wav";
+import laserSFX from "../assets/sounds/sfx_laser.ogg";
+import collectSFX from "../assets/sounds/sfx_collect.wav";
+import tapSFX from "../assets/sounds/sfx_tap.ogg";
+import loseSFX from "../assets/sounds/sfx_lose.ogg";
+import introMusic from "../assets/sounds/intro.mp3";
 
 class MainScene extends Phaser.Scene {
   constructor(scene) {
@@ -9,72 +33,54 @@ class MainScene extends Phaser.Scene {
   preload() {
     // Load background image
     this.load.image("space", spaceImg);
-    this.load.image("small-stars", "../assets/backgrounds/stars-small_1.png");
-    this.load.image("big-stars", "../assets/backgrounds/stars-big_1_1_pc.png");
+    this.load.image("small-stars", smallStarsImg);
+    this.load.image("big-stars", bigStarsImg);
 
     // Load player and laser
-    this.load.image("player", "../assets/ships/ship-1.png", {
+    this.load.image("player", playerImg, {
       frameWidth: 40,
       frameHeight: 100,
     });
-    this.load.image("player-laser", "../assets/laser/blue/short-ray.png");
+    this.load.image("player-laser", playerLaserImg);
 
     // load explosion effect
-    this.load.spritesheet(
-      "explosion",
-      "../assets/effects/space-ship-explosion.png",
-      { frameWidth: 96, frameHeight: 93 }
-    );
+    this.load.spritesheet("explosion", explosionImg, {
+      frameWidth: 96,
+      frameHeight: 93,
+    });
 
     // TODO: add asteroids
-    // load chaser asteroid
-    // this.load.spritesheet("asteroid", "../assets/enemies/level1/asteroid.png", {
-    //   frameWidth: 64,
-    //   frameHeight: 64,
-    // });
 
     // load level 1 enemies and laser
-    this.load.image("enemy-lvl1-1", "../assets/enemies/level1/1.png");
-    this.load.image("laser-lvl1-1", "../assets/laser/blue/round.png");
-    this.load.image("enemy-lvl1-2", "../assets/enemies/level1/2.png");
-    this.load.image("laser-lvl1-2", "../assets/laser/yellow/round.png");
-    this.load.image("enemy-lvl1-3", "../assets/enemies/level1/3.png");
-    this.load.image("laser-lvl1-3", "../assets/laser/pink/round.png");
+    this.load.image("enemy-lvl1-1", enemy1Lvl1Img);
+    this.load.image("laser-lvl1-1", enemy1Lvl1LaserImg);
+    this.load.image("enemy-lvl1-2", enemy2Lvl1Img);
+    this.load.image("laser-lvl1-2", enemy2Lvl1LaserImg);
+    this.load.image("enemy-lvl1-3", enemy3Lvl1Img);
+    this.load.image("laser-lvl1-3", enemy3Lvl1LaserImg);
 
     // load chaser enemy
-    this.load.image("chaser-enemy", "../assets/enemies/chaser.png");
+    this.load.image("chaser-enemy", chaserImg);
 
     // TODO: add different enemy levels
-    // load level 2 enemies
-    // this.load.image("enemy-lvl2-1", "../assets/enemies/level2/1.png");
-    // this.load.image("enemy-lvl2-2", "../assets/enemies/level2/2.png");
-    // this.load.image("enemy-lvl2-3", "../assets/enemies/level2/3.png");
-
-    // load level 3 enemies
-    // this.load.image("enemy-lvl3-1", "../assets/enemies/level3/1.png");
-    // this.load.image("enemy-lvl3-2", "../assets/enemies/level3/2.png");
-    // this.load.image("enemy-lvl3-3", "../assets/enemies/level3/3.png");
-
-    // load Enemy laser
-    // this.load.image("enemy-laser", "../assets/laser/pink/short-ray.png");
 
     // load buttons
-    this.load.image("play-btn", "../assets/buttons/unpressed/play.png");
-    this.load.image("play-btn-pressed", "../assets/buttons/pressed/play.png");
+    this.load.image("play-btn", playBtnImg);
+    this.load.image("play-btn-pressed", playBtnPressedImg);
 
     // load audio
-    this.load.audio("explode-sound", "../assets/sounds/sfx_explosion.wav");
-    this.load.audio("laser-sound", "../assets/sounds/sfx_laser.ogg");
-    this.load.audio("collect-sound", "../assets/sounds/sfx_collect.wav");
-    this.load.audio("tap-sound", "../assets/sounds/sfx_tap.ogg");
-    this.load.audio("lose-sound", "../assets/sounds/sfx_lose.ogg");
-    this.load.audio("intro", "../assets/sounds/intro.mp3");
+    this.load.audio("explode-sound", explosionSFX);
+    this.load.audio("laser-sound", laserSFX);
+    this.load.audio("collect-sound", collectSFX);
+    this.load.audio("tap-sound", tapSFX);
+    this.load.audio("lose-sound", loseSFX);
+    this.load.audio("intro", introMusic);
 
     // load game logo
-    this.load.image("game-logo", "../assets/logo.png");
+    this.load.image("game-logo", gameLogoImg);
     // load main menu screen characters
-    this.load.image("alien", "../assets/alien.png");
-    this.load.image("space-soldier", "../assets/space-soldier.png");
+    this.load.image("alien", homeScreenAliensImg);
+    this.load.image("space-soldier", homeScreenSoldiersImg);
   }
 
   create() {
