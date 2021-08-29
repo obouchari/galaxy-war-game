@@ -3,6 +3,7 @@ import MainMenuScene from "./scenes/scene-main-menu";
 import FirstScene from "./scenes/first-scene";
 import GameOverScene from "./scenes/scene-game-over";
 import screenSize from "./utils/screen-size";
+import PreloadScene from "./scenes/preload-scene";
 
 import "normalize.css";
 import "./style.css";
@@ -18,7 +19,9 @@ const config = {
       gravity: { x: 0, y: 0 },
     },
   },
-  scene: [MainMenuScene, FirstScene, GameOverScene],
+  scene: [PreloadScene, MainMenuScene, FirstScene, GameOverScene],
 };
 
-export default new Phaser.Game(config);
+const game = new Phaser.Game(config);
+
+export default game;

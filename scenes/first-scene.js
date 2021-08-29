@@ -4,25 +4,27 @@ import { random } from "lodash";
 import Player from "../entities/player";
 import GunShipEnemy from "../entities/gun-ship-enemy";
 import ChaserEnemy from "../entities/chaser-enemy";
+import Life from "../entities/life";
 
-import { world } from "../world";
+import playerStats from "../player-stats";
 
 import MainScene from "./main-scene";
 
 class FirstScene extends MainScene {
   constructor() {
     super({ key: "FirstScene" });
+  }
 
-    this.hpBg;
-    this.hpBar;
+  init(data) {
+    this.selectedShip = data.ship;
   }
 
   // Create the scene
   create() {
     super.create.call(this);
 
-    this.hpBg = this.add.rectangle(100, 100, 400, 50, "0x000000").setOrigin(0);
-    this.hpBar = this.add.rectangle(100, 100, 400, 50, "0x00ff00").setOrigin(0);
+    // create hp indicator
+    this.hp = this.add.sprite(40, 40, "hp", 20).setOrigin(0);
 
     // Create explosion animation
     this.anims.create({
@@ -31,14 +33,6 @@ class FirstScene extends MainScene {
       frameRate: 20,
       repeat: 0,
     });
-
-    // Create asteroid breaking animation
-    // this.anims.create({
-    //   key: "asteroid",
-    //   frames: this.anims.generateFrameNumbers("asteroid"),
-    //   frameRate: 20,
-    //   repeat: 0,
-    // });
 
     // Add sound effects
     this.sfx = {
@@ -52,9 +46,9 @@ class FirstScene extends MainScene {
       this,
       this.game.config.width * 0.5,
       this.game.config.height * 0.85,
-      "player",
+      this.selectedShip,
       {
-        key: "player-laser",
+        key: `${this.selectedShip}-laser`,
       }
     );
 
@@ -72,10 +66,11 @@ class FirstScene extends MainScene {
     this.enemies = this.add.group();
     this.enemyLasers = this.add.group();
     this.playerLasers = this.add.group();
+    this.lives = this.add.group();
 
     this.time.addEvent({
       delay: 3000,
-      callback: function () {
+      callback: () => {
         const randEnemyIndex = random(1, 3);
         let enemy;
 
@@ -101,12 +96,6 @@ class FirstScene extends MainScene {
           }
         } else {
           // TODO: Add carrier ships
-          // enemy = new CarrierShipEnemy(
-          //   this,
-          //   Phaser.Math.Between(0, this.game.config.width),
-          //   0,
-          //   "carrier-ship"
-          // );
         }
 
         if (enemy) {
@@ -115,6 +104,27 @@ class FirstScene extends MainScene {
         }
       },
 
+      callbackScope: this,
+      loop: true,
+    });
+
+    this.time.addEvent({
+      delay: 10000,
+      callback: () => {
+        let life;
+        if (Phaser.Math.Between(0, 10) === 5) {
+          life = new Life(
+            this,
+            Phaser.Math.Between(0, this.game.config.width),
+            0,
+            "life"
+          );
+        }
+
+        if (life) {
+          this.lives.add(life);
+        }
+      },
       callbackScope: this,
       loop: true,
     });
@@ -129,22 +139,31 @@ class FirstScene extends MainScene {
             enemy.onDestroy();
           }
 
-          enemy.explode();
+          enemy.explode(true);
           playerLaser.destroy();
         }
       }
     );
+
+    // detect collision between player and life
+    this.physics.add.overlap(this.player, this.lives, function (player, life) {
+      if (!player.getData("isDead") && !life.getData("isDead")) {
+        if (playerStats.hp < 100) {
+          playerStats.updateHp(5);
+        }
+        life.destroy();
+      }
+    });
 
     // detect collision between player and enemy's laser
     this.physics.add.overlap(
       this.player,
       this.enemyLasers,
       function (player, enemyLaser) {
-        if (world.hp >= 10) {
-          world.hp -= 10;
-        }
         if (!player.getData("isDead") && !enemyLaser.getData("isDead")) {
-          // player.explode();
+          if (playerStats.hp > 0) {
+            playerStats.updateHp(-5);
+          }
           enemyLaser.destroy();
         }
       }
@@ -156,17 +175,19 @@ class FirstScene extends MainScene {
       this.enemies,
       function (player, enemy) {
         if (!player.getData("isDead") && !enemy.getData("isDead")) {
-          player.explode();
-          enemy.explode();
+          player.explode(false);
+          player.onDestroy();
+          enemy.explode(true);
         }
       }
     );
   }
 
-  updateHpBar() {
-    this.hpBar.displayWidth = world.hp * 4;
-    if (world.hp === 0 && !this.player.getData("isDead")) {
-      this.player.explode();
+  updateHpUI() {
+    this.hp.setFrame(playerStats.hp * 0.2);
+    if (playerStats.hp === 0 && !this.player.getData("isDead")) {
+      this.player.explode(false);
+      this.player.onDestroy();
     }
   }
 
@@ -174,7 +195,7 @@ class FirstScene extends MainScene {
   update() {
     super.update.call(this);
 
-    this.updateHpBar();
+    this.updateHpUI();
 
     if (!this.player.getData("isDead")) {
       this.player.update();

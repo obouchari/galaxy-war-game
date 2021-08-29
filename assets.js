@@ -1,13 +1,8 @@
 export default {
   gameLogo:
     "https://res.cloudinary.com/zentai-consulting/image/upload/v1630150379/game/logo_wvunxu.png",
-
-  characters: {
-    soldiers:
-      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630150377/game/space-soldier_p167po.png",
-    aliens:
-      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630150373/game/alien_xf63lg.png",
-  },
+  gameOver:
+    "https://res.cloudinary.com/zentai-consulting/image/upload/v1630237545/game/game-over_af04fk.png",
 
   bg: {
     space:
@@ -22,26 +17,30 @@ export default {
 
   ui: {
     buttons: {
-      play: {
-        default:
-          "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151746/game/buttons/unpressed/play_b6eiuz.png",
-        pressed:
-          "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151745/game/buttons/pressed/play_mnq9vg.png",
-      },
+      play: "https://res.cloudinary.com/zentai-consulting/image/upload/v1630257319/game/buttons/play_aff9tv.png",
+      replay:
+        "https://res.cloudinary.com/zentai-consulting/image/upload/v1630257319/game/buttons/replay_bmycwb.png",
+      menu: "https://res.cloudinary.com/zentai-consulting/image/upload/v1630257319/game/buttons/menu_uo1nk1.png",
+      muted:
+        "https://res.cloudinary.com/zentai-consulting/image/upload/v1630257319/game/buttons/muted_cmzej3.png",
+      unmuted:
+        "https://res.cloudinary.com/zentai-consulting/image/upload/v1630257319/game/buttons/unmuted_prugov.png",
     },
   },
 
   player: {
     ship1:
-      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151807/game/ships/ship-1_yhgrmy.png",
+      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630260575/game/ships/ship-1_hyovmo.png",
     ship2:
-      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151807/game/ships/ship-2_cwtfbn.png",
+      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630260575/game/ships/ship-2_rvy1t8.png",
     ship3:
-      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151807/game/ships/ship-3_cglpzh.png",
+      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630260575/game/ships/ship-3_bgcg7t.png",
     laser1:
       "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151798/game/laser/blue/short-ray_e07kie.png",
-    laser2: "",
-    laser3: "",
+    laser2:
+      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630259621/game/laser/curve-triple_ke38dd.png",
+    laser3:
+      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630259493/game/laser/broad-one-pink_qtymrf.png",
   },
 
   enemies: {
@@ -69,6 +68,14 @@ export default {
       "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151730/game/space-ship-explosion_ztnwfs.png",
   },
 
+  stats: {
+    hp: "https://res.cloudinary.com/zentai-consulting/image/upload/v1630274506/game/life/life_w1j9tz.png",
+  },
+
+  collectibles: {
+    life: "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151720/game/collectibles/health_t8jdl5.png",
+  },
+
   sfx: {
     explosion:
       "https://res.cloudinary.com/zentai-consulting/video/upload/v1630151811/game/sounds/sfx_explosion_m6h12z.wav",
@@ -78,6 +85,8 @@ export default {
       "https://res.cloudinary.com/zentai-consulting/video/upload/v1630151811/game/sounds/sfx_collect_fhufgh.wav",
     tap: "https://res.cloudinary.com/zentai-consulting/video/upload/v1630151811/game/sounds/sfx_tap_xwzhwi.ogg",
     lose: "https://res.cloudinary.com/zentai-consulting/video/upload/v1630151811/game/sounds/sfx_lose_r3mncm.ogg",
+    gameOver:
+      "https://res.cloudinary.com/zentai-consulting/video/upload/v1630243013/game/sounds/gameover_qtvaxq.mp3",
   },
 
   music: {
