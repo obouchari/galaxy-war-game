@@ -36,7 +36,7 @@ export default {
     ship3:
       "https://res.cloudinary.com/zentai-consulting/image/upload/v1630260575/game/ships/ship-3_bgcg7t.png",
     laser1:
-      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151798/game/laser/blue/short-ray_e07kie.png",
+      "https://res.cloudinary.com/zentai-consulting/image/upload/v1630151798/game/laser/short-ray_e07kie.png",
     laser2:
       "https://res.cloudinary.com/zentai-consulting/image/upload/v1630259621/game/laser/curve-triple_ke38dd.png",
     laser3:
