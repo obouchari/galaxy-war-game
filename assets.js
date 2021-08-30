@@ -1,8 +1,8 @@
 export default {
   gameLogo:
-    "https://res.cloudinary.com/zentai-consulting/image/upload/v1630150379/game/logo_wvunxu.png",
+    "https://res.cloudinary.com/zentai-consulting/image/upload/v1630288534/game/logo_rakgsa.png",
   gameOver:
-    "https://res.cloudinary.com/zentai-consulting/image/upload/v1630237545/game/game-over_af04fk.png",
+    "https://res.cloudinary.com/zentai-consulting/image/upload/v1630288684/game/game-over_yupi3t.png",
 
   bg: {
     space:
