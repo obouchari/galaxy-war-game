@@ -74,6 +74,10 @@ yarn
 $ yarn build
 ```
 
+## Checkout the live version at:
+
+[galaxy-war.netlify.app](https://galaxy-war.netlify.app/)
+
 ## Have any issues?
 
 Shoot me an email at [obouchari@gmail.com](mailto:obouchari@gmail.com)
