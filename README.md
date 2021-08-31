@@ -1,8 +1,8 @@
 ## Game Concept:
 
-![alt text][screenshot]
-
 It's a 2D, Shooter-classic arcade game where the player controls a spaceship and shoots aliens spaceships (enemy) to save the galaxy.
+
+![alt text][screenshot]
 
 ## Target Platforms:
 
